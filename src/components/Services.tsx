@@ -1,48 +1,40 @@
 import { motion } from "framer-motion";
+import { Brain, Code2, Workflow, Camera } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 const services = [
   {
-    number: "01",
-    title: "AI Solutions for Businesses",
-    description:
-      "Custom AI integrations, intelligent automations and bespoke models tailored to elevate your operations.",
+    icon: Brain,
+    title: "AI Solutions",
+    description: "Custom AI solutions that automate tasks, analyze data, and drive growth.",
   },
   {
-    number: "02",
-    title: "Website Development",
-    description:
-      "Premium, performant websites built from scratch — designed to convert and crafted to impress.",
+    icon: Code2,
+    title: "Web Development",
+    description: "Beautiful, fast, and responsive websites built with modern technologies.",
   },
   {
-    number: "03",
-    title: "Automation Systems",
-    description:
-      "End-to-end workflow automation that saves hours, reduces friction and scales effortlessly.",
+    icon: Workflow,
+    title: "Automation",
+    description: "Workflow automation and systems that save time and increase efficiency.",
   },
   {
-    number: "04",
+    icon: Camera,
     title: "Photography & Editing",
-    description:
-      "Visual storytelling with cinematic editing — refined imagery that aligns with your brand identity.",
+    description: "High-quality photography and professional editing that captures your story.",
   },
 ];
 
 export function Services() {
   return (
-    <section id="services" className="relative py-32 md:py-44 px-6 border-t border-white/5">
+    <section id="services" className="relative py-24 md:py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="Services"
-          title={
-            <>
-              What I do —{" "}
-              <span className="italic text-gradient-gold">end to end.</span>
-            </>
-          }
+          eyebrow="What I Do"
+          title={<>Services I Offer</>}
         />
 
-        <div className="grid md:grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -50,26 +42,17 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group relative bg-background p-10 md:p-12 hover:bg-card transition-colors duration-500 cursor-default"
+              className="group relative surface-card rounded-2xl p-7 hover:border-[var(--brand)]/40 hover:-translate-y-1 transition-all duration-500 cursor-default"
             >
-              <div className="flex items-start justify-between mb-8">
-                <span className="font-display text-sm text-[var(--gold)]/60">
-                  {service.number}
-                </span>
-                <div className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[var(--gold)] group-hover:bg-[var(--gold)]/10 transition-all duration-500">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground group-hover:text-[var(--gold)] transition-colors">
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </div>
+              <div className="w-12 h-12 rounded-xl bg-[var(--brand)]/10 border border-[var(--brand)]/20 flex items-center justify-center mb-6 group-hover:bg-[var(--brand)]/20 transition-colors">
+                <service.icon className="w-6 h-6 text-[var(--brand)]" />
               </div>
-              <h3 className="font-display text-2xl md:text-3xl mb-4 group-hover:text-[var(--gold)] transition-colors duration-500">
+              <h3 className="font-display text-xl font-bold mb-3">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {service.description}
               </p>
-
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-[var(--gold)] to-transparent group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
         </div>

@@ -1,24 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Phone, Mail, Instagram, ArrowRight } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 const contacts = [
-  {
-    label: "Phone",
-    value: "+91 7715 808 331",
-    href: "tel:7715808331",
-  },
-  {
-    label: "Email",
-    value: "leanderlancyml@gmail.com",
-    href: "mailto:leanderlancyml@gmail.com",
-  },
-  {
-    label: "Instagram",
-    value: "@_leander007",
-    href: "https://instagram.com/_leander007",
-  },
+  { icon: Phone, value: "7715808331", href: "tel:7715808331" },
+  { icon: Mail, value: "leanderlancyml@gmail.com", href: "mailto:leanderlancyml@gmail.com" },
+  { icon: Instagram, value: "@_leander007", href: "https://instagram.com/_leander007", external: true },
 ];
 
 export function Contact() {
@@ -37,48 +26,42 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-32 md:py-44 px-6 border-t border-white/5">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-[var(--gold)]/8 blur-[140px] pointer-events-none" />
+    <section id="contact" className="relative py-24 md:py-32 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+          {/* Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="text-[11px] tracking-[0.25em] uppercase text-[var(--brand)] font-medium mb-4">
+              Let's Connect
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-[-0.03em] font-bold">
+              Let's Build Something
+              <br />
+              Amazing Together
+            </h2>
 
-      <div className="relative max-w-7xl mx-auto">
-        <SectionHeading
-          eyebrow="Contact"
-          title={
-            <>
-              Let's build something{" "}
-              <span className="italic text-gradient-gold">powerful</span> together.
-            </>
-          }
-          description="Have a project in mind, or simply want to say hello? I'd love to hear from you."
-        />
-
-        <div className="grid md:grid-cols-5 gap-10 md:gap-16">
-          {/* Contact info */}
-          <div className="md:col-span-2 space-y-6">
-            {contacts.map((c, i) => (
-              <motion.a
-                key={c.label}
-                href={c.href}
-                target={c.label === "Instagram" ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group block p-6 rounded-xl border border-white/10 hover:border-[var(--gold)]/50 hover:bg-[var(--gold)]/[0.03] transition-all duration-500"
-              >
-                <div className="text-[10px] tracking-[0.3em] uppercase text-[var(--gold)] mb-2">
-                  {c.label}
-                </div>
-                <div className="text-lg md:text-xl font-display group-hover:text-[var(--gold)] transition-colors flex items-center justify-between">
-                  {c.value}
-                  <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-[var(--gold)]">
-                    →
-                  </span>
-                </div>
-              </motion.a>
-            ))}
-          </div>
+            <div className="mt-10 space-y-4">
+              {contacts.map((c) => (
+                <a
+                  key={c.value}
+                  href={c.href}
+                  target={c.external ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 hover:text-[var(--brand)] transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[var(--brand)]/10 border border-[var(--brand)]/20 flex items-center justify-center group-hover:bg-[var(--brand)]/20 transition-colors">
+                    <c.icon className="w-4 h-4 text-[var(--brand)]" />
+                  </div>
+                  <span className="text-base">{c.value}</span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Form */}
           <motion.form
@@ -86,50 +69,38 @@ export function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="md:col-span-3 space-y-5 p-8 md:p-10 rounded-2xl border border-white/10 bg-card/40 backdrop-blur-sm"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="surface-card rounded-2xl p-6 md:p-8 space-y-4"
           >
-            <div>
-              <label className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-2 block">
-                Name
-              </label>
+            <div className="grid sm:grid-cols-2 gap-4">
               <input
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-transparent border-b border-white/15 py-3 text-foreground focus:outline-none focus:border-[var(--gold)] transition-colors"
-                placeholder="Your name"
+                placeholder="Your Name"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[var(--brand)]/50 transition-colors"
               />
-            </div>
-            <div>
-              <label className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-2 block">
-                Email
-              </label>
               <input
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-transparent border-b border-white/15 py-3 text-foreground focus:outline-none focus:border-[var(--gold)] transition-colors"
-                placeholder="you@domain.com"
+                placeholder="Your Email"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[var(--brand)]/50 transition-colors"
               />
             </div>
-            <div>
-              <label className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-2 block">
-                Message
-              </label>
-              <textarea
-                rows={5}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-transparent border-b border-white/15 py-3 text-foreground focus:outline-none focus:border-[var(--gold)] transition-colors resize-none"
-                placeholder="Tell me about your project…"
-              />
-            </div>
+            <textarea
+              rows={6}
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              placeholder="Your Message"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[var(--brand)]/50 transition-colors resize-none"
+            />
             <button
               type="submit"
-              className="mt-4 w-full md:w-auto px-8 py-3.5 bg-[var(--gold)] text-background rounded-full font-medium text-sm tracking-wide hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-[1.02]"
+              className="group w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-[var(--brand)] text-background rounded-xl font-medium text-sm hover:shadow-[0_0_40px_rgba(255,104,0,0.5)] transition-all duration-300"
             >
-              Send Message →
+              Send Message
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.form>
         </div>
