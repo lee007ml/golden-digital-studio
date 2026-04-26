@@ -1,30 +1,38 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
+import plushpadImg from "@/assets/project-plushpad.jpg";
+import porscheImg from "@/assets/project-porsche.jpg";
+import realestateImg from "@/assets/project-realestate.jpg";
+import homefinderImg from "@/assets/project-homefinder.jpg";
 
 const projects = [
   {
     title: "Plushpad Search",
     description: "AI-powered search platform for smarter and faster results.",
     url: "https://plushpad-search.lovable.app",
+    image: plushpadImg,
     gradient: "from-purple-600/30 via-blue-600/20 to-transparent",
   },
   {
     title: "Porsche Website",
     description: "Luxury car website with modern design and smooth experience.",
     url: "https://porche-website-sandy.vercel.app/",
+    image: porscheImg,
     gradient: "from-zinc-400/20 via-zinc-700/20 to-transparent",
   },
   {
     title: "Real Estate AI",
     description: "AI-driven real estate platform for smart property recommendations.",
     url: "https://real-estate-ai-calli-go6g.bolt.host/",
+    image: realestateImg,
     gradient: "from-amber-500/25 via-orange-700/15 to-transparent",
   },
   {
     title: "HomeFinder AI",
     description: "Intelligent platform to find your dream home, powered by AI.",
     url: "https://homefinder-ai-17.preview.emergentagent.com/",
+    image: homefinderImg,
     gradient: "from-yellow-500/25 via-orange-600/15 to-transparent",
   },
 ];
@@ -53,8 +61,16 @@ export function Projects() {
             >
               {/* Visual */}
               <div className="relative aspect-[16/10] overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                <img
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                  width={1280}
+                  height={800}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} mix-blend-overlay`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-card/10" />
 
                 <div
                   className="absolute inset-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-700"
