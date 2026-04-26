@@ -4,10 +4,12 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
+  align = "left",
 }: {
   eyebrow: string;
   title: React.ReactNode;
   description?: string;
+  align?: "left" | "center";
 }) {
   return (
     <motion.div
@@ -15,19 +17,16 @@ export function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7 }}
-      className="max-w-3xl mb-16 md:mb-20"
+      className={`max-w-3xl mb-12 md:mb-16 ${align === "center" ? "mx-auto text-center" : ""}`}
     >
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-px bg-[var(--gold)]" />
-        <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--gold)]">
-          {eyebrow}
-        </span>
+      <div className={`text-[11px] tracking-[0.25em] uppercase text-[var(--brand)] font-medium mb-4 ${align === "center" ? "" : ""}`}>
+        {eyebrow}
       </div>
-      <h2 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tight">
+      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-[-0.03em] font-bold">
         {title}
       </h2>
       {description && (
-        <p className="mt-6 text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
+        <p className="mt-5 text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">
           {description}
         </p>
       )}
